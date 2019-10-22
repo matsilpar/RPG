@@ -1,0 +1,826 @@
+import random
+import os
+
+
+def menu():
+    print("-x-x-x-x-x-x MENU DO JOGO -x-x-x-x-x-x ")
+    opcao = input("Opções:\n1.Iniciar\n2.Explicação do jogo\n3.Manual de Sobrevivencia\n4.Explicação da mecanica do jogo\n5.Ler Patch Notes\n6.Opcoes\n7.Fechar Jogo\n")
+    if (opcao == '4'):
+        arq = open('mecanica.txt', 'r')
+        cont = arq.read()
+        print(cont)
+        arq.close()
+        os.system("pause")
+        os.system('cls')
+        return "repetir"
+    if (opcao == '2'):
+        arq = open('historia.txt', 'r')
+        cont = arq.read()
+        print(cont)
+        arq.close()
+        os.system("pause")
+        os.system('cls')
+        return "repetir"
+    if (opcao == '1'):
+        os.system("pause")
+        os.system('cls')
+    if (opcao == '3'):
+        arq = open('ItenSkill.txt', 'r')
+        cont = arq.read()
+        print(cont)
+        arq.close()
+        os.system("pause")
+        os.system('cls')
+        return "repetir"
+    if (opcao == '5'):
+        os.system('cls')
+        arq = open('PATCH NOTES.txt', 'r')
+        cont = arq.read()
+        print(cont)
+        arq.close()
+        os.system("pause")
+        os.system('cls')
+        return "repetir"
+    if (opcao == '6'):
+        os.system('cls')
+        print("Desculpa pelo incoveniente, opcao ainda em desenvolvimento")
+        os.system("pause")
+        os.system('cls')
+        return "repetir"
+    if (opcao == '7'):
+        return "fechar"
+    if (opcao != '1' and opcao != '2' and opcao != '3' and opcao != '4' and opcao != '5' and opcao != '6' and opcao != '7'):
+        print("Opção selecionada errada, por favor digite uma opção valida ...")
+        os.system('cls')
+        return "repetir"
+
+
+def dificuldade():
+    dif = random.randint(1,14)
+    #dif = 7
+    if (dif == 1 or dif == 2 or dif == 3 or dif == 11):
+        mod = 1
+    if (dif == 4 or dif == 5 or dif == 6 or dif == 7 or dif == 12 or dif == 14):
+        mod = 3
+    if (dif == 8 or dif == 9 or dif == 13):
+        mod = 5
+    if (dif == 10):
+        mod = 7
+    return mod
+
+
+def personagem ():
+    global vida, dano, nivel, status, classe, nome, gold, level, mochila, pers, skill, xp
+    skill = 0
+    xp = 0
+    arq = open('log.txt', 'a')
+    nome = input("Digite seu nome: ")
+    gold = 0
+    level = 0
+    pers = "a"
+    mochila = 0
+    iten = "Vazia"
+    while (pers != 'extra'):
+        if (nome == 'Billy'):
+            ger = random.randint(1,3)
+            mochila = ger
+            pers = "extra"
+            classe = "MERCADOR"
+            vida = 15
+            dano = 15
+            nivel = 1
+            gold = 50
+            if (mochila == 1):
+                iten = "Bomba de fumaca"
+            elif (mochila == 2):
+                iten = "Espada enferrujada"
+            elif (mochila == 3):
+                iten = "Escudo podre"
+            skill = 4
+            texto = ("CLASSE ESCOLHIDA: {}\nNOME: {}\nDEFESA: {}\nDANO: {}\nGOLD: {}\nMOCHILA: {}\n\n".format(classe, nome, vida, dano, gold, iten))
+            break
+        elif (nome == 'Matsilpar'):
+            skill = 0
+            pers = "extra"
+            vida = int(input("Digite a defesa do seu personagem : "))
+            dano = int(input("Digite o ataque do seu personagem : "))
+            nivel = int(input("Digite o nivel do seu personagem : "))
+            gold = int(input("Digite o dinheiro do seu personagem: "))
+            classe = input("Digite a classe do seu personagem: ")
+            mochila = int(input("Digite o item inicial: \n0. Nada\n1. Bomba de fumaca\n2. Espada enferrujada\n3. Escudo podre\n"))
+            if (mochila == 1):
+                iten = "Bomba de fumaca"
+            elif (mochila == 2):
+                iten = "Espada enferrujada"
+            elif (mochila == 3):
+                iten = "Escudo podre"
+            else:
+                iten = "Vazia"
+            texto = ("CLASSE ESCOLHIDA: {}\nNOME: {}\nDEFESA: {}\nDANO: {}\nGOLD: {}\nMOCHILA: {}\n\n".format(classe, nome, vida, dano, gold, iten))
+            break
+        print("\tMENU PERSONAGEM:\n1. Mago\t\tDefesa: 14/20\tAtaque: 18/20\tSkill: Bola de Fogo\n2. Arqueiro\tDefesa: 16/20\tAtaque: 16/20\tSkill: Golpe Furtivo\n3. Guerreiro\tDefesa: 20/20\tAtaque: 12/20\tSkill: Grito de Guerra\n4. Ninja\tDefesa: 13/20\tAtaque: 19/20\tSkill: Escapada Ninja")
+        pers = input("Digite o numero relativo a sua classe: ")
+        if (pers == '1'):
+            pers = "extra"
+            classe = "MAGO"
+            vida = 14
+            dano = 18
+            nivel = 1
+            skill = 1
+            texto = ("PERSONAGEM ESCOLHIDO: MAGO\nNOME: {}\nDEFESA: {}\nDANO: {}\n\n".format(nome, vida, dano))
+        elif (pers == '2'):
+            pers = "extra"
+            classe = "ARQUEIRO"
+            vida = 16
+            dano = 16
+            nivel = 1
+            skill = 2
+            texto = ("CLASSE ESCOLHIDA: ARQUEIRO\nNOME: {}\nDEFESA: {}\nDANO: {}\n\n".format(nome, vida, dano))
+        elif (pers == '3'):
+            pers = "extra"
+            classe = "GUERREIRO"
+            vida = 20
+            dano = 12
+            nivel = 1
+            skill = 3
+            texto = ("CLASSE ESCOLHIDA: GUERREIRO\nNOME: {}\nDEFESA: {}\nDANO: {}\n\n".format(nome, vida, dano))
+        elif (pers == '4'):
+            pers = "extra"
+            classe = "NINJA"
+            vida = 13
+            dano = 19
+            nivel = 1
+            mochila = 1
+            skill = 5
+            texto = ("CLASSE ESCOLHIDA: NINJA\nNOME: {}\nDEFESA: {}\nDANO: {}\nMOCHILA: Bomba de Fumaca\n\n".format(nome, vida, dano))
+    arq.write(texto)
+    arq.close()
+
+
+def encontro ():
+    global vida, dano, nivel, status, classe, nome, gold, monstro, level, mochila, m, t, r, vida_monstro, ataque_monstro, monstro, tempo, local, ss, aa, ee, ll, bb, dd, xp
+    mos = 0
+    mod = dificuldade()
+    enc = random.randint(1, 100)
+    itemger = random.randint(1, 100)
+    if (tempo == 5):
+        local = regiao()
+        tempo = 0
+    if (tempo < 5):
+        tempo += 1
+    if(local == 1):
+        if (enc < 5):
+            monstro = 1
+        elif (enc < 30):
+            monstro = 2
+        elif (enc < 40):
+            monstro = 3
+        elif (enc < 50):
+            monstro = 4
+        elif (enc < 55):
+            monstro = 5
+        elif (enc < 60):
+            monstro = 6
+            if (nome == "Billy"):
+                monstro = 7
+        elif (enc < 65):
+            monstro = 7
+        elif (enc < 70):
+            monstro = 8
+        else:
+            monstro = 9
+    if(local == 2):
+        if (enc < 20):
+            monstro = 1
+        elif (enc < 40):
+            monstro = 2
+        elif (enc < 80):
+            monstro = 3
+        elif (enc < 90):
+            monstro = 4
+        elif (enc < 95):
+            monstro = 8
+        else:
+            monstro = 9
+    if(local == 3):
+        if (enc < 5):
+            monstro = 1
+        elif (enc < 10):
+            monstro = 2
+        elif (enc < 15):
+            monstro = 3
+        elif (enc < 55):
+            monstro = 4
+        elif (enc < 70):
+            monstro = 6
+            if (nome == "Billy"):
+                monstro = 7
+        elif (enc < 85):
+            monstro = 7
+        elif (enc < 95):
+            monstro = 8
+        else:
+            monstro = 9
+    if (local == 4):
+        if (enc < 50):
+            monstro = 1
+        else :
+            monstro = 5
+    #itemger = 1
+    #enc = 10
+    arq = open('log.txt', 'a')
+    if (monstro == 1): #SLIME
+        ss += 1
+        monstro = 1
+        vida_monstro = int((12+(nivel * mod)) * 0.5)
+        ataque_monstro = int((6+(nivel * mod)) * 0.5)
+        print("\tMonstro: SLIME\n\tVida: {}\n\tDano: {}".format(vida_monstro, ataque_monstro))
+        texto = ("Encontrado um Slime com {} de vida e {} de ataque\n".format(vida_monstro, ataque_monstro))
+        texto2 = (" ")
+        mos = 1
+    if (monstro == 2): #ARANHA
+        aa += 1
+        monstro = 2
+        vida_monstro = int((8+(nivel * mod)) * 0.8)
+        ataque_monstro = int((10+(nivel * mod)) * 0.8)
+        print("\tMonstro: ARANHA\n\tVida: {}\n\tDano: {}".format(vida_monstro, ataque_monstro))
+        texto = ("Encontrado um Aranha com {} de vida e {} de ataque\n".format(vida_monstro, ataque_monstro))
+        texto2 = (" ")
+        mos = 1
+    if (monstro == 3): #ESQUELETO
+        ee += 1
+        monstro = 3
+        vida_monstro = int((6+(nivel * mod)) * 1)
+        ataque_monstro = int((12+(nivel * mod)) * 1)
+        print("\tMonstro: ESQUELETO\n\tVida: {}\n\tDano: {}".format(vida_monstro, ataque_monstro))
+        texto = ("Encontrado um Esqueleto com {} de vida e {} de ataque\n".format(vida_monstro, ataque_monstro))
+        texto2 = (" ")
+        mos = 1
+    if (monstro == 4): #BANDIDO
+        bb += 1
+        monstro = 4
+        vida_monstro = int((15+(nivel * mod)) * 1)
+        ataque_monstro = int((15+(nivel * mod)) * 1)
+        print("\tMonstro: BANDIDO\n\tVida: {}\n\tDano: {}".format(vida_monstro, ataque_monstro))
+        texto = ("Encontrado um Bandido com {} de vida e {} de ataque\n".format(vida_monstro, ataque_monstro))
+        texto2 = (" ")
+        mos = 1
+    if (monstro == 5): #DRAGÃO
+        dd += 1
+        monstro = 5
+        vida_monstro = int((10+(nivel * mod)) * 3)
+        ataque_monstro = int((10+(nivel * mod)) * 3)
+        print("\tMonstro: DRAGÃO\n\tVida: {}\n\tDano: {}".format(vida_monstro, ataque_monstro))
+        texto = ("Encontrado um Dragão com {} de vida e {} de ataque\n".format(vida_monstro, ataque_monstro))
+        texto2 = (" ")
+        mos = 1
+    if (monstro == 6): #MERCADOR
+        m += 1
+        comp = ''
+        compra = 1000
+        while (comp == '' or (compra * 5) > gold):
+            comp = input("\tBILLY, O MERCADOR\n\tEquipamento a venda (+1 ataque por 5 gold), quantos você deseja comprar? ")
+            if (comp != ''):
+                compra = int(comp)
+            else:
+                compra = 10000
+            if (compra < 0):
+                print("AQUI É UMA LOJA E NAO UM PENHORES PORRA")
+                compra = 0
+                vida = 0
+            
+        gold = gold - (compra*5)
+        dano = dano + compra
+        texto2 = ("(+{} ataque)\n\n".format(compra))
+        if (compra == 0):
+            texto = ("Você avistou uma loja mas resolveu não comprar nada dela\n")
+        else:
+            texto = ("Você avistou uma loja e decidiu gastar um pouco do seu gold para comprar {} de ataque\n". format(compra))
+        os.system("pause")
+        os.system('cls')
+    if (monstro == 7): #TAVERNA
+        t += 1
+        dor = ''
+        dormir = 1000
+        while (dor == '' or (dormir * 20 > gold)):
+            dor = input("\tTAVERNA\n\tVocê pode descansar aqui (+5 vida por 20 gold/noite), quantas noites deseja passar? ")
+            if (dor != ''):
+                dormir = int(dor)
+            else:
+                dormir = 10000
+            if (dormir < 0):
+                print("DORMIR NEGATIVO = MORRER!!!")
+                dormir = 0
+                vida = 0
+        gold = gold - (dormir * 20)
+        vida = vida + (dormir * 5)
+        texto2 = ("(+{} defesa)\n\n".format(dormir*5))
+        if (dormir == 0):
+            texto = ("Você avistou uma taverna mas resolveu não entrar\n")
+        else:
+            texto = ("Você avistou uma taverna e decidiu descansar por {} dias\n". format(dormir))
+        os.system("pause")
+        os.system('cls')
+    if (monstro == 8): #ALTAR
+        r += 1
+        rezar = "a"
+        while (rezar != 'S' and rezar != 's' and rezar != 'N' and rezar != 'n'):
+            rezar = input("Voce encontrou um altar no meio do caminho, deseja rezar? (S/N) ")
+            if (rezar == 's' or rezar == 'S'):
+                dest = random.randint (1, 21)
+                quant = random.randint (1, 3)
+                #quant = 1
+                #dest = 21
+                if (dest >= 1 and dest <= 5):
+                    vida -= quant
+                    texto = ("Apos a oracao, voce percebe que esta mais fragilizado\n")
+                    texto2 = ("(-{} defesa)\n\n".format(quant))
+                if (dest > 5 and dest <= 10):
+                    vida += quant
+                    texto = ("Apos a oracao voce apaga e quando acorda se sente rejuvesnecido\n")
+                    texto2 = ("(+{} defesa)\n\n".format(quant))
+                if (dest > 10 and dest <= 15):
+                    dano -= quant
+                    texto = ("Apos a oracao, voce apaga e quando acorda percebe que parte do seu equipamento desapareceu\n")
+                    texto2 = ("(-{} ataque)\n\n".format(quant))
+                if (dest > 15 and dest <= 21):
+                    dano += quant
+                    texto = ("Apos a oracao, voce se sente mais preparado e um tanto quanto mais forte\n")
+                    texto2 = ("(+{} ataque)\n\n".format(quant))
+                if (dest == 21):
+                    status -= 1
+                    vida -= 5
+                    texto = ("Assim que voce começa a rezar voce apaga, quando acorda percebe que esta mais fraco e mais perto do fim\n")
+                    texto2 = ("(-5 defesa)\n\n")
+                    if (status <= 0):
+                        texto3 = ("\nVOCÊ MORREU!!!!\n\n\n")
+                        print(texto, texto2, texto3)
+                        os.system("pause")
+                        os.system('cls')
+                        arq.write(texto)
+                        arq.write(texto2)
+                        arq.write(texto3)
+                        return 0
+                print(texto, texto2)
+            elif (rezar == 'N' or rezar == 'n') :
+                texto = ("Apesar de avistar um altar, voce resolve ignorar e continuar sua jornada\n")
+                texto2 = ("\n\n")
+        os.system("pause")
+        os.system('cls')
+    if (monstro == 9): #LOBO
+        ll += 1
+        monstro = 9
+        vida_monstro = int((12+(nivel * mod)) * 1)
+        ataque_monstro = int((6+(nivel * mod)) * 1)
+        print("\tMonstro: LOBO\n\tVida: {}\n\tDano: {}".format(vida_monstro, ataque_monstro))
+        texto = ("Encontrado um Lobo com {} de vida e {} de ataque\n".format(vida_monstro, ataque_monstro))
+        texto2 = (" ")
+        mos = 1
+    arq.write(texto)
+    arq.write(texto2)
+    arq.close()
+    if (mos == 1):
+        confronto(itemger)
+    
+
+def confronto(itemger):
+    global vida, dano, nivel, status, classe, nome, gold, level, mochila, s, a, e, b, d, l, skill, cd, vida_monstro, ataque_monstro, xp
+    arq = open('log.txt', 'a')
+    aux = 0
+    if (mochila == 1):
+        usar = input("Deseja usar a bomba de fumaca para escapar desse confronto? (S/N) ")
+        if (usar == "s" or usar == "S"):
+            texto = ("Voce usou a bomba de fumaca para escapar do confronto ...\n\n")
+            print(texto)
+            arq.write(texto)
+            mochila = 0
+            os.system("pause")
+            os.system('cls')
+            return 0
+    if (mochila == 2):
+        usar = input("Deseja usar a espada enferrujada para aumentar seu ataque para esse confronto? (S/N) ")
+        if (usar == "s" or usar == "S"):
+            texto = ("Apos usar a espada para a batalha ela se quebrou ...\n\n")
+            print(texto)
+            arq.write(texto)
+            mochila = 0
+            dano += 5
+            aux = 1
+    if (mochila == 3):
+        usar = input("Deseja usar o escudo podre para aumentar sua defesa para esse confronto? (S/N) ")
+        if (usar == "s" or usar == "S"):
+            texto = ("Apos usar o escudo para a batalha ele se quebrou ...\n\n")
+            print(texto)
+            arq.write(texto)
+            mochila = 0
+            vida += 5
+            aux = 2
+    if (skill == 1 or skill == 2 or skill == 3 or skill == 4 or skill == 5 or skill == 0):
+        mom = skills()
+    if (mom == 4):
+        texto = ("\nVoce usou a skill de ADM ...\n\n")
+        print(texto)
+        arq.write(texto)
+        os.system("pause")
+        os.system('cls')
+        return 0
+    if (mom == 3):
+        texto = ("\nVoce usou a skill Escapada Ninja para escapar do confronto ...\n\n")
+        print(texto)
+        arq.write(texto)
+        cd = 0
+        os.system("pause")
+        os.system('cls')
+        return 0
+    if (vida <= ataque_monstro):
+        matar = False
+        if (status > 1):
+            texto = ("Você foi atordoado pelo monstro")
+            texto2 = ("\n(-3 defesa)\n\n")
+            status = status - 1
+            nivel = nivel - 1
+            vida = vida - 3
+            print(texto, texto2)
+        else:
+            status = 0
+            texto = ("\nVOCÊ MORREU!!!!\n\n\n")
+            texto2 = (atual())
+            print(texto, texto2)
+    else:
+        if (dano >= vida_monstro):
+            matar = True
+            texto = ("Você matou o monstro!!!!")
+            print(texto)
+            if (monstro == 1): #Slime
+                gold += 5
+                s += 1
+                xp += 3
+            elif (monstro == 2): #Aranha
+                gold += 10
+                a += 1
+                xp += 5
+            elif (monstro == 3): #Esqueleto
+                gold += 25
+                e += 1
+                xp += 7
+            elif (monstro == 9): #Lobo
+                gold += 25
+                l += 1
+                xp += 7
+            elif (monstro == 4): #Bandido
+                gold += 50
+                b += 1
+                xp += 15
+            elif (monstro == 5): #Dragão
+                gold += 500
+                d+= 1
+                xp += 200
+            while (xp >= 10):
+                print("\nVoce upou de nivel, ganhando assim 5 pontos para gastar com atributos")
+                nivel = nivel + 1
+                addvida = 10000000
+                addataque = 1000000
+                level += 5
+                xp -= 10
+                while (addvida + addataque > level):
+                    print("\nVoce tem {} pontos para gastar com atributos". format (level))
+                    add = ""
+                    addvida = -1
+                    while (add == "" or addvida < 0):
+                        add = input("Quantos pontos você quer adicionar na sua defesa? ")
+                        if (add != ""):
+                            addvida = int(add)
+                    add = ""
+                    addataque = -1
+                    while (add == "" or addataque < 0):
+                        add = input("Quantos pontos você quer adicionar na seu ataque? ")
+                        if (add != ""):
+                            addataque  = int(add)
+                            texto2 = ("\n(+{} defesa/+{} ataque)\n\n".format(addvida, addataque))
+                    print(texto2)
+                    level -= (addvida + addataque)
+                    vida += addvida
+                    dano += addataque
+                    addvida = 0
+                    addataque = 0
+                    if (aux == 1):
+                        aux = 0
+                        dano -= 5
+                    if (aux == 2):
+                        aux = 0
+                        vida -= 5
+            else:
+                texto2 = ("\n\n\n")
+        else:
+            matar = False
+            texto = ("Você não matou o monstro, mas conseguiu sobreviver ao confronto machucado")
+            texto2 = ("\n(-1 defesa)\n\n")
+            print(texto, texto2)
+            vida = vida - 1
+    if (aux == 1):
+        aux = 0
+        dano -= 5
+    arq.write(texto)
+    arq.close()
+    if (itemger < 10 and mochila == 0 and matar):
+        mochila = item(mochila)
+    if (mom == 1):
+        arq = open('log.txt', 'a')
+        textos = ("Voce usou a skill Golpe Furtivo ...\n\n")
+        dano -= 10
+        print(textos)
+        arq.write(textos)
+        arq.close()
+    elif (mom == 2):
+        arq = open('log.txt', 'a')
+        textos = ("Voce usou a skill Grito de Guerra ...\n\n")
+        print(textos)
+        arq.write(textos)
+        arq.close()
+        vida -= 10
+    if (cd < 15):
+        cd += 1
+    arq = open('log.txt', 'a')
+    arq.write(texto2)
+    arq.close()
+    os.system("pause")
+    os.system('cls')
+
+
+def item (mochila):
+    arq = open('log.txt', 'a')
+    ger = random.randint(1,3)
+    #ger = 2
+    if (ger == 1):
+        texto3 = ("\nDepois de derrotar seu inimigo, voce acha uma bomba de fumaca\n")
+        print("{}(Pode ser usada uma vez para escapar de um confronto)".format (texto3))
+        arq.write(texto3)
+        arq.close()
+        return 1
+    elif (ger == 2):
+        texto3 = ("\nDepois de derrotar seu inimigo, voce acha uma espada enferrujada\n")
+        print("{}(Pode ser usada uma vez para aumentar seu ataque em 5 pontos durante o confronto)".format (texto3))
+        arq.write(texto3)
+        arq.close()
+        return 2
+    elif (ger == 3):
+        texto3 = ("\nDepois de derrotar seu inimigo, voce acha um escudo podre\n")
+        print("{}(Pode ser usada uma vez para aumentar sua defesae em 5 pontos durante o confronto)".format (texto3))
+        arq.write(texto3)
+        arq.close()
+        return 3
+  
+  
+def atual ():
+    global vida, dano, nivel, status, classe, nome, gold, level, mochila, cd, d, xp
+    if (mochila == 1):
+        iten = "Bomba de fumaca"
+    elif (mochila == 2):
+        iten = "Espada enferrujada"
+    elif (mochila == 3):
+        iten = "Escudo podre"
+    elif (mochila == 0):
+        iten = "Vazia"
+    var1 = vida // 10
+    if (var1 == 0):
+        varv = "  "
+    elif (var1 < 10):
+        varv = " "
+    elif (var1 < 100):
+        varv = ""
+    var2 = dano // 10
+    if (var2 == 0):
+        vara = "  "
+    elif (var2 < 10):
+        vara = " "
+    elif (var2 < 100):
+        vara = ""
+    var3 = nivel // 10
+    if (var3 == 0):
+        varn = "  "
+    elif (var3 < 10):
+        varn = " "
+    elif (var3 < 100):
+        varn = ""
+    var4 = gold // 10
+    if (var4 == 0):
+        varg = "   "
+    elif (var4 < 10):
+        varg = "  "
+    elif (var4 < 100):
+        varg = " "
+    var5 = cd // 10
+    if (var5 == 0):
+        varc = "  "
+    elif (var5 < 10):
+        varc = " "
+    elif (var5 < 100):
+        varc = ""
+    var5 = xp // 10
+    if (var5 == 0):
+        varxp = "  "
+    elif (var5 < 10):
+        varxp = " "
+    elif (var5 < 100):
+        varxp = ""
+    x = ("NOME: {}\tCLASSE: {}\tMOCHILA: {}\n______________________\n| DEFESA: {}{}        |\n| DANO: {}{}          |\n| NIVEL: {}{}         |\n| GOLD: {}{}         |\n| SKILL: {}/15{}      |\n| XP: {}/10{}         |\n|____________________|\n".format(nome, classe, iten, vida, varv, dano, vara, nivel, varn, gold, varg, cd, varc, xp, varxp))
+    if (status <= 0 or vida <= 0 or d == 1 or gold >= 500):
+        x = ("NOME: {}\tCLASSE: {}\tMOCHILA: {}\nDEFESA: {}\nATAQUE: {}\nNIVEL: {}\nGOLD: {}\nSKILL: {}/15".format(nome, classe, iten, vida, dano, nivel, gold, cd))
+    return x
+
+
+def skills():
+    global skill, mochila, dano, vida, cd, vida_monstro, ataque_monstro
+    if (cd == 15):
+        usar = input("Deseja usar sua skill? (S/N): ")
+        if (usar == 's' or usar == 'S'):
+            if (skill == 0):
+                return 4
+            if (skill == 1):
+                vida_monstro -= 15
+                ataque_monstro -= 10
+                cd = 0
+                return 0
+            if (skill == 2):
+                vida += 3
+                dano += 10
+                cd = 0
+                return 1
+            if (skill == 3):
+                vida += 10
+                dano += 3
+                cd = 0
+                return 2
+            if (skill == 4):
+                cd = 0
+                arq = open('log.txt', 'a')
+                mochila = item(mochila)
+                textos = ("Você usou a skill Olhar Observador ...\n\n")
+                print(textos)
+                arq.write(textos)
+                arq.close()
+                return 0
+            if (skill == 5):
+                cd = 0
+                return 3
+
+
+def regiao():
+    arq = open('log.txt', 'a')
+    regiao1 = random.randint(1,3)
+    regiao2 = regiao1
+    while (regiao2 == regiao1):
+        regiao2 = random.randint(2,4)
+    if (regiao1 == 1):
+        if (regiao2 == 2):
+            escolh = input("Na sua direita voce avista uma Floresta e na sua esquerda uma Caverna, para onde voce deseja seguir? (D/E)")
+            escolha = test(escolh)
+            if (escolha == 'd' or escolha == 'D'):
+                local = 1
+            else:
+                local = 2
+        elif (regiao2 == 3):
+            escolh = input("Na sua direita voce avista uma Floresta e na sua esquerda uma Cidade, para onde voce deseja seguir? (D/E)")
+            escolha = test(escolh)
+            if (escolha == 'd' or escolha == 'D'):
+                local = 1
+            else:
+                local = 3
+        elif (regiao2 == 4):
+            escolh = input("Na sua direita voce avista uma Floresta e na sua esquerda uma Montanha, para onde voce deseja seguir? (D/E)")
+            escolha = test(escolh)
+            if (escolha == 'd' or escolha == 'D'):
+                  local = 1
+            else:
+                 local = 4
+    elif (regiao1 == 2):
+        if (regiao2 == 3):
+            escolh = input("Na sua direita voce avista uma Caverna e na sua esquerda uma Cidade, para onde voce deseja seguir? (D/E)")
+            escolha = test(escolh)
+            if (escolha == 'd' or escolha == 'D'):
+                local = 2
+            else:
+                 local = 3
+        elif (regiao2 == 4):
+            escolh = input("Na sua direita voce avista uma Floresta e na sua esquerda uma Montanha, para onde voce deseja seguir? (D/E)")
+            escolha = test(escolh)
+            if (escolha == 'd' or escolha == 'D'):
+                 local = 2
+            else:
+                local = 4
+    else:
+        escolh = input("Na sua direita voce avista uma Cidade e na sua esquerda uma Montanha, para onde voce deseja seguir? (D/E)")
+        escolha = test(escolh)
+        if (escolha == 'd' or escolha == 'D'):
+            local = 3
+        else:
+            local = 4
+    if (local == 1):
+        texto = ("Com suas armas em maos, voce se preparou para enfrentar qualquer perigo e entrou na Floresta\n")
+    elif (local == 2):
+        texto = ("Apos acender uma tocha, voce entrou na Caverna\n")
+    elif (local == 3):
+        texto = ("Bem-Vindo a Cidade\n")
+    else:
+        texto = ("Voce resolveu fugir para as Montanha\n")
+    arq.write(texto)
+    arq.close()
+    return local
+
+
+def test(teste):
+    while (teste != 'd' and teste != 'D' and teste != 'E' and teste != 'e'):
+        teste = input("Digita um valor correto porra ... ")
+    return teste
+
+
+cont = 1
+while (cont == 1): #Jogo
+    mom = 0
+    local = 0
+    tempo = 5
+    vida_monstro = 0
+    ataque_monstro = 0
+    cd = 15
+    s = 0
+    a = 0
+    e = 0
+    b = 0
+    d = 0
+    m = 0
+    r = 0
+    t = 0
+    l = 0
+    ss = 0
+    aa = 0
+    ee = 0
+    bb = 0
+    dd = 0
+    mm = 0
+    rr = 0
+    tt = 0
+    ll = 0
+    sair = "repetir"
+    while(sair == "repetir"):
+        sair = menu()
+    if (sair == "fechar"):
+        break
+    monstro = 0
+    arq = open('log.txt', 'w')
+    arqmonstro = open('log_monstro.txt', 'w')
+    arq.write("-x-x-x-x-x-x-x- LOG DE EVENTOS -x-x-x-x-x-x-x-\n\n\n")
+    status = '5'
+    while (status != '1' and status != '2' and status != '3'):
+        status = input("\tMENU DIFICULDADE:\n1. DIFICIL: 1 VIDA\n2. MEDIO: 2 VIDAS\n3. FACIL: 3 VIDAS\n")
+    status = int(status)
+    texto1 = ("DIFICULDADE ESCOLHIDA: {}\n".format (status))
+    print(texto1)
+    arq.write(texto1)
+    arq.close()
+    os.system("pause")
+    os.system('cls')
+    personagem()
+    print("Defesa: {}\nDano: {}".format(vida, dano))
+    os.system("pause")
+    os.system('cls')
+    while(status >= 1):
+        #print(status)
+        if (d == 1):
+            texto = ("PARABENS, VOCÊ CONSEGUIU MATAR O DRAGAO E SALVAR A CIDADE!!!\n\n")
+            texto2 = (atual())
+            print(texto, texto2)
+            arq = open('log.txt', 'a')
+            arq.write(texto)
+            arq.write(texto2)
+            arq.close()
+            break
+        elif (gold >= 500):
+            texto = ("PARABENS, VOCÊ CONSEGUIU RECUPERAR TODO O GOLD!!!\n\n")
+            texto2 = (atual())
+            print(texto, texto2)
+            arq = open('log.txt', 'a')
+            arq.write(texto)
+            arq.write(texto2)
+            arq.close()
+            break
+        if (vida <= 0):
+            arq = open('log.txt', 'a')
+            texto = ("\nVOCÊ MORREU!!!!\n\n\n")
+            texto2 = (atual())
+            print(texto, texto2)
+            arq.write(texto)
+            arq.write(texto2)
+            arq.close()
+            break
+        if (nivel == 0):
+            nivel = 1
+        print(atual())
+        encontro()
+    arqmonstro.write("-x-x-x-x-x-x-x- LOG DE ENCONTROS -x-x-x-x-x-x-x-\n\n\n")
+    arqmonstro.write("SLIME: {} encontrados\nARANHA: {} encontradas\nESQUELETO: {} encontrados\nLOBO: {} encontrados\nBANDIDO: {} encontrados\nDRAGAO: {} encontrados\nLojas encontradas: {}\nTavernas encontradas: {}\nAltares encontrados: {}\n" .format(ss, aa, ee, ll, bb, dd, m, t, r))
+    arqmonstro.write("\n\nSLIME: {} mortos\nARANHA: {} mortas\nESQUELETO: {} mortos\nLOBO: {} mortos\nBANDIDO: {} mortos\nDRAGAO: {} mortos\n" .format(s, a, e, l, b, d))
+    arqmonstro.close()
+    cont = int(input("Digite 1 para jogar novamente e 0 para fechar o jogo: "))
+    os.system("pause")
+    os.system('cls')
+    
